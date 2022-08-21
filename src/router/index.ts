@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import movieDetailsVue from "@/views/movieDetails.vue";
-
 import HomeView from '../views/HomeView.vue'
+import movieDetailsVue from "@/views/movieDetails.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
