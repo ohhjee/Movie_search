@@ -43,15 +43,25 @@
       >
         <router-link :to="'/movie/' + movie.imdbID" class="movie-link">
           <div class="product-image flex items-center justify-center relative">
-            <img :src="movie.Poster" alt="Movie Poster" class="w-full h-[70vh] object-cover object-top" />
-            <div class="move-type capitalize font-bold text-white p-[10px] absolute bg-green-600 left-0 bottom-2 ">
+            <img
+              :src="movie.Poster"
+              alt="Movie Poster"
+              class="w-full h-[70vh] object-cover object-top"
+            />
+            <div
+              class="move-type capitalize font-bold text-white p-[10px] absolute bg-green-600 left-0 bottom-2"
+            >
               {{ movie.Type }}
             </div>
           </div>
           <div class="">
-            <div class="detail bg-[#496583] py-[16px] px-[8px] rounded-bl-[8px] rounded-br-[8px]">
+            <div
+              class="detail bg-[#496583] py-[16px] px-[8px] rounded-bl-[8px] rounded-br-[8px]"
+            >
               <p class="text-[16px] text-[#aaa]">{{ movie.Year }}</p>
-              <h3 class="text-white text-[1rem] lg:text-[1rem] ">{{ movie.Title }}</h3>
+              <h3 class="text-white text-[1rem] lg:text-[1rem]">
+                {{ movie.Title }}
+              </h3>
             </div>
           </div>
         </router-link>
@@ -61,31 +71,30 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref } from "vue";
 import axios from "axios";
 
-
 export default defineComponent({
- name: "HomeView",
+  name: "HomeView",
   components: {},
   setup() {
     const search = ref<string>("");
-    const movies = ref<any>([]);
+    const movies = ref<string[]>([]);
     const SearcMovie = async () => {
       if (search.value !== "") {
         // console.log(process.env.VUE_APP_BASE_URL);
         try {
           await axios(
-            `http://www.omdbapi.com/?apikey=fe4814bc&s=${search.value}`
+            `https://www.omdbapi.com/?apikey=fe4814bc&s=${search.value}`
           )
             .then((res) => res.data)
             .then((data) => {
               movies.value = data.Search;
               search.value = "";
-              
+
               console.log(movies.value);
             });
-        } catch (err:any) {
+        } catch (err: any | unknown) {
           console.log(err.message);
         }
       }

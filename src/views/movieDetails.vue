@@ -40,21 +40,20 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref,onBeforeMount } from 'vue';
+import { defineComponent, ref, onBeforeMount } from "vue";
 
 import { useRoute } from "vue-router";
 import axios from "axios";
 
-
 export default defineComponent({
- setup() {
-    const movie = ref<any>({});
+  setup() {
+    const movie = ref<object>({});
     const route = useRoute();
     const loader = ref<boolean>(true);
     onBeforeMount(async () => {
       try {
         await axios(
-          `http://www.omdbapi.com/?apikey=fe4814bc&i=${route.params.id}&plot=full`
+          `https://www.omdbapi.com/?apikey=fe4814bc&i=${route.params.id}&plot=full`
         )
           .then((res) => res.data)
           .then((data) => {
