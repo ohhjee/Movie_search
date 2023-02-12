@@ -92,10 +92,10 @@ export default defineComponent({
               movies.value = data.Search;
               search.value = "";
 
-              console.log(movies.value);
+              // console.log(movies.value);
             });
         } catch (err: any | unknown) {
-          console.log(err.message);
+          // console.log(err.message);
         }
       }
     };

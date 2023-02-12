@@ -61,7 +61,7 @@ export default defineComponent({
             movie.value = data;
           });
       } catch (error) {
-        console.log("hey");
+        // console.log("hey");
       }
     });
     return { movie, loader };
