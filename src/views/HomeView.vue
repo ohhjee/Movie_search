@@ -37,6 +37,12 @@
     </form>
     <div class="move-list lg:flex-wrap lg:flex m-[0px_8px]">
       <div
+        v-if="show"
+        class="bg-red-500 md:right-[2rem] p-4 rounded left-0 right-0 top-[1rem] md:bottom-[1rem] absolute w-1/2 mx-auto md:mx-0 md:w-2/12"
+      >
+        Search can't be empty
+      </div>
+      <div
         v-for="movie in movies"
         :key="movie.imdbID"
         class="lg:w-1/2 p-[16px] lg:flex-[1_1_50%] movie mb-[5rem]"
@@ -80,9 +86,12 @@ export default defineComponent({
   setup() {
     const search = ref<string>("");
     const movies = ref<string[]>([]);
+    // const error = ref<string>("");
+    const show = ref<boolean>(false);
     const SearcMovie = async () => {
       if (search.value !== "") {
         // console.log(process.env.VUE_APP_BASE_URL);
+
         try {
           await axios(
             `https://www.omdbapi.com/?apikey=fe4814bc&s=${search.value}`
@@ -97,9 +106,17 @@ export default defineComponent({
         } catch (err: any | unknown) {
           // console.log(err.message);
         }
+      } else {
+        if (search.value == "") {
+          show.value = true;
+          // error.value = "Search can't be empty";
+          setTimeout(() => {
+            show.value = false;
+          }, 5000);
+        }
       }
     };
-    return { search, movies, SearcMovie };
+    return { search, movies, SearcMovie, show };
   },
 });
 </script>
